@@ -10,23 +10,24 @@ function clickBoton() {
     actualizarListaGasto();
 }
 
-        function actualizarListaGasto() {
-            const listaElementos = document.getElementById('listaDeGastos');
-            const totalElemento = document.getElementById('totalGastos');
-            let htmlLista ='';
-            let totalGastos = 0;
-            listaNombreGastos.forEach((elemento, posicion) => {
-            const valorGasto = Number(listaValoresGastos[posicion]);
-            htmlLista += `<li>${elemento} - USD ${valorGasto.toFixed(2)}
-            <button onclick="eliminarGasto(${posicion});">Eliminar</button>
+function actualizarListaGasto() {
+    const listaElementos = document.getElementById('listaDeGastos');
+    const totalElemento = document.getElementById('totalGastos');
+    let htmlLista = '';
+    let totalGastos = 0;
+
+    listaNombreGastos.forEach((elemento, posicion) => {
+        const valorGasto = Number(listaValoresGastos[posicion]);
+        htmlLista += `<li>${elemento} - USD ${valorGasto.toFixed(2)}
+        <button onclick="eliminarGasto(${posicion});">Eliminar</button>
         </li>`;
-                totalGastos += Number(totalGastos);
+        
+        totalGastos += valorGasto;
+    });
 
-            });
-
-            listaElementos.innerHTML = htmlLista;
-            totalElemento.innerHTML = totalGastos.toFixed(2);
-            limpiar();
+    listaElementos.innerHTML = htmlLista;
+    totalElemento.innerHTML = totalGastos.toFixed(2);
+    limpiar();
 }
 
 function limpiar(){
@@ -34,8 +35,8 @@ function limpiar(){
     document.getElementById('valorGasto').value = '';
 }
 
-    function eliminarGasto(posicion){
-        listaNombreGastos.splice(posicion, 1);
-        listaValoresGastos.splice(posicion, 1);
-        actualizarListaGasto();
-    }
+function eliminarGasto(posicion){
+    listaNombreGastos.splice(posicion, 1);  // Elimina el nombre del gasto
+    listaValoresGastos.splice(posicion, 1); // Elimina el valor del gasto
+    actualizarListaGasto(); // Actualiza la lista para reflejar los cambios
+}
